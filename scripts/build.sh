@@ -38,9 +38,9 @@ assert_preconditions()
 assert_preconditions "$1"
 
 declare -A builds
-builds[release]="-DCMAKE_BUILD_TYPE=Release"
+#builds[release]="-DCMAKE_BUILD_TYPE=Release"
 builds[debug]="-DCMAKE_BUILD_TYPE=Debug"
-builds[scan_build]="-DSCAN_BUILD=ON"
+#builds[scan_build]="-DSCAN_BUILD=ON"
 
 cd "$1" || {
   echo >&2 "Failed changing working directory to $1"; exit 1; 
