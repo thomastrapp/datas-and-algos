@@ -2,6 +2,7 @@
 
 #include "ds/stack/main.h"
 #include "al/mergesort/main.h"
+#include "al/sort-and-count-inversions/main.h"
 
 int main(int argc, char **argv) {
   testing::InitGoogleTest(&argc, argv);
