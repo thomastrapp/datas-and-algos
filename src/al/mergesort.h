@@ -52,12 +52,13 @@ void mergesort_merge(
 template<typename iter>
 void mergesort(iter begin, iter end)
 {
-  ssize_t size = end - begin;
+  typedef typename std::iterator_traits<iter>::difference_type iter_range;
+  iter_range size = end - begin;
 
   if( size < 2 )
     return;
 
-  ssize_t center = size / 2;
+  iter_range center = size / 2;
 
   mergesort(begin, begin + center);
   mergesort(begin + center, end);
