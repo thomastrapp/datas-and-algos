@@ -1,49 +1,31 @@
 #include <cstdlib>
-#include <iostream>
-#include <fstream>
+#include <array>
 
-#include "al/mergesort.h"
-#include "al/sort-and-count-inversions.h"
+#include "ds/square-matrix.h"
 
-int main()
+int main(int argc, char * argv[])
 {
-  std::vector<int> v;
-  v.reserve(100000);
-
+  const size_t matrix_size = 2;
+  std::array<ds::square_matrix<long>, 4> matrices {{
+    ds::square_matrix<long>(matrix_size),
+    ds::square_matrix<long>(matrix_size),
+    ds::square_matrix<long>(matrix_size),
+    ds::square_matrix<long>(matrix_size)
+  }};
+  
+  int h = 1;
+  for(auto& m : matrices)
   {
-    std::ifstream f("data/integers.txt");
-
-    if( !f.is_open() )
-    {
-      std::cout << "cannot open file for reading" << std::endl;
-      return EXIT_FAILURE;
-    }
-
-    int num = 0;
-    while( f.good() )
-    {
-      if( f >> num )
-        v.push_back(num);
-    }
-
-    f.close();
+    for(size_t i = 0; i < matrix_size; ++i)
+      for(size_t j = 0; j < matrix_size; ++j)
+      {
+        m.set(i, j, h++);
+      }
   }
-
-  std::cout << "Read file, " 
-            << v.size() 
-            << " integers loaded" 
-            << std::endl;
-
-  size_t inversions = 0;
-  inversions = 
-    al::sort_and_count_inversions<
-      typename std::vector<int>::iterator, 
-      size_t
-    >
-  (v.begin(), v.end());
-
-  std::cout << "Inversions: " << inversions << std::endl;
-
+  
+  ds::square_matrix<long> m_multiplied(matrices[0] * matrices[1]);
+  m_multiplied.print();
+  
   return EXIT_SUCCESS;
 }
 
