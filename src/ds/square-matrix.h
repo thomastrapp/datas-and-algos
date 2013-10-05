@@ -72,11 +72,6 @@ class square_matrix
       {
         // see also square_matrix<value_type>::square_split()
         
-        // This is unneccessarily complex, but I wanted to remove all branches
-        // just for kicks & giggles (and maybe speed :D)
-        // If I wasn't the only one who cared for this code, I wouldn't do 
-        // this without a (forged) benchmark, I promise!
-        
         // the first pair of arrays (0 and 1) gets put into this matrix's
         // top half
         // the second pair of arrays (2 and 3) gets put into this matrix's
@@ -207,11 +202,6 @@ class square_matrix
       
       for(size_t i = 0; i < size; ++i)
       {
-        // This is unneccessarily complex, but I wanted to remove all branches
-        // just for kicks & giggles (and maybe speed :D)
-        // If I wasn't the only one who cared for this code, I wouldn't do 
-        // this without a (forged) benchmark, I promise!
-        
         // the first half gets put into the first pair of arrays (0 and 1)
         // the second half gets put into the second pair of arrays (2 and 3)
         const bool top = i < size / 2;
