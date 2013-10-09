@@ -18,7 +18,7 @@ ExternalProject_Add(
     URL http://googletest.googlecode.com/files/gtest-1.6.0.zip
     TIMEOUT 10
 
-    # googlestep has no install target
+    # googletest has no install target
     INSTALL_COMMAND ""
 
     LOG_DOWNLOAD ON
@@ -32,6 +32,7 @@ endif(CMAKE_COMPILER_IS_GNUCXX)
 ExternalProject_Get_Property(googletest source_dir)
 INCLUDE_DIRECTORIES(${source_dir}/include)
 INCLUDE_DIRECTORIES("${PROJECT_SOURCE_DIR}/../src")
+INCLUDE_DIRECTORIES("${PROJECT_SOURCE_DIR}/src")
 
 ExternalProject_Get_Property(googletest binary_dir)
 LINK_DIRECTORIES(${binary_dir})

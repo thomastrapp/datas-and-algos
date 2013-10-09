@@ -1,31 +1,22 @@
 #include <cstdlib>
-#include <array>
+#include <vector>
+#include <iostream>
 
-#include "ds/square-matrix.h"
+#include "al/radixsort.h"
+#include "util/print.h"
+#include "util/file.h"
 
 int main(int argc, char * argv[])
 {
-  const size_t matrix_size = 2;
-  std::array<ds::square_matrix<long>, 4> matrices {{
-    ds::square_matrix<long>(matrix_size),
-    ds::square_matrix<long>(matrix_size),
-    ds::square_matrix<long>(matrix_size),
-    ds::square_matrix<long>(matrix_size)
-  }};
-  
-  int h = 1;
-  for(auto& m : matrices)
-  {
-    for(size_t i = 0; i < matrix_size; ++i)
-      for(size_t j = 0; j < matrix_size; ++j)
-      {
-        m.set(i, j, h++);
-      }
-  }
-  
-  ds::square_matrix<long> m_multiplied(matrices[0] * matrices[1]);
-  m_multiplied.print();
-  
+  std::vector<unsigned int> random_numbers;
+  random_numbers.reserve(1000000);
+
+  util::push_integer_file_to_container("data/integers.txt", random_numbers);
+
+  al::radixsort(random_numbers);
+
+  util::print_container(random_numbers);
+
   return EXIT_SUCCESS;
 }
 

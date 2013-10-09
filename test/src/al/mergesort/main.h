@@ -3,7 +3,7 @@
 
 #include "gtest/gtest.h"
 #include "al/mergesort.h"
-#include "random-number-array.h"
+#include "data/random-number-array.h"
 
 namespace {
 
@@ -85,17 +85,24 @@ TEST(AlMergesortTest, SortsValues)
 
 TEST(AlMergesortTest, Sorts10kValues)
 {
-  // globals:
+  // namespace data:
   // - random_numbers
-  // - random_numbers_sorted: already sorted by std::sort (and pasted into random-number-array.h)
+  // - random_numbers_sorted: already sorted by std::sort 
+  // (and pasted into random-number-array.h)
 
-  ASSERT_EQ(random_numbers.size(), random_numbers_sorted.size());
+  using data::random_numbers;
+  using data::random_numbers_sorted;
 
-  al::mergesort(random_numbers.begin(), random_numbers.end());
+  std::vector<unsigned int> numbers(random_numbers);
+  std::vector<unsigned int> numbers_sorted(random_numbers_sorted);
 
-  EXPECT_EQ(random_numbers.size(), random_numbers_sorted.size());
-  EXPECT_TRUE(std::equal(random_numbers.begin(), random_numbers.end(), random_numbers_sorted.begin()));
-  EXPECT_EQ(0, std::memcmp(random_numbers.data(), random_numbers_sorted.data(), random_numbers.size()));
+  ASSERT_EQ(numbers.size(), numbers_sorted.size());
+
+  al::mergesort(numbers.begin(), numbers.end());
+
+  EXPECT_EQ(numbers.size(), numbers_sorted.size());
+  EXPECT_TRUE(std::equal(numbers.begin(), numbers.end(), numbers_sorted.begin()));
+  EXPECT_EQ(0, std::memcmp(numbers.data(), numbers_sorted.data(), numbers.size()));
 }
 
 }

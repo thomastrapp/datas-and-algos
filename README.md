@@ -10,19 +10,21 @@ A (still) small repository of algorithms I have written for fun, including unit 
 
 Algorithms:
 ------------
-- **mergesort.h**  
-  Typical Mergesort implementation using C++.
-- **sort-and-count-inversions.h**  
+- **al/mergesort.h**  
+  Typical Mergesort
+- **al/sort-and-count-inversions.h**  
   Inplace sort. Returns the count of inversions.
-- **strassen-matrix-multiply.h**  
+- **al/strassen-matrix-multiply.h**  
   Matrix multiplication as invented by Strassen ([Wikipedia: Strassen algorithm](http://en.wikipedia.org/wiki/Strassen_algorithm "Wikipedia: Strassen algorithm"))
+- **al/radixsort.h**  
+  Radixsort ([Wikipedia: Radixsort](http://en.wikipedia.org/wiki/Radixsort "Wikipedia: Radixsort"))
 
 Data structures:
 -----------------
-- **square-matrix.h**  
+- **ds/square-matrix.h**  
   A square matrix to be used with strassen-matrix-multiply.h
-- **stack.h**  
-  A typical stack (worse than std::stack)
+- **ds/stack.h**  
+  A typical stack
 
 Build unit tests:
 ------------------
