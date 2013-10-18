@@ -52,7 +52,7 @@ Either use the convenience script in `scripts/build-and-run-tests.sh` or use cma
         make
         ./datas-and-algos-test
         
-The unit testing framework ([googletest](http://code.google.com/p/googletest/ "Google Code: googletest") will automatically be downloaded and built by cmake.
+The unit testing framework ([googletest](http://code.google.com/p/googletest/ "Google Code: googletest")) will automatically be downloaded and built by cmake.
 
 Dependencies:
 --------------
