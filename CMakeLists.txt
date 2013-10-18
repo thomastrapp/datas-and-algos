@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
-project(data-structures)
+project(datas-and-algos)
 
 #set(CMAKE_VERBOSE_MAKEFILE on)
 
