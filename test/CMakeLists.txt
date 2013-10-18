@@ -5,7 +5,7 @@
 # http://stackoverflow.com/questions/9689183/cmake-googletest
 
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8.7 FATAL_ERROR)
-PROJECT(data-structures-test)
+PROJECT(datas-and-algos-test)
 
 #set(CMAKE_VERBOSE_MAKEFILE on)
 
