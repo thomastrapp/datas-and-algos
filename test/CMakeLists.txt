@@ -15,7 +15,7 @@ SET_DIRECTORY_PROPERTIES(PROPERTIES EP_PREFIX ${CMAKE_BINARY_DIR}/thirdparty)
 
 ExternalProject_Add(
     googletest
-    URL http://googletest.googlecode.com/files/gtest-1.6.0.zip
+    URL http://googletest.googlecode.com/files/gtest-1.7.0.zip
     TIMEOUT 10
 
     # googletest has no install target
