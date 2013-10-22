@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <vector>
 #include <type_traits>
+#include <limits>
 
 namespace al
 {
