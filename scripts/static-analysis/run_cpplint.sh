@@ -14,9 +14,13 @@ assert_dependencies()
   "$cpplint" --filter= > /dev/null 2>&1 \
     || { echo >&2 "Cannot execute cpplint; place it in the working directory"; exit 1; }
   
-  # check if first parameter is an existing directory
+  # check if a directory was passed
   [ -d "$1" ] \
-    || { echo >&2 "Given parameter is not a directory"; exit 1; } 
+    || { echo >&2 "Project root not found"; exit 1; } 
+
+  # check if src directory exists
+  [ -d "$1/src" ] \
+    || { echo >&2 "src directory not found"; exit 1; } 
 }
 
 print_usage()
@@ -25,19 +29,19 @@ print_usage()
   echo "       Wrapper for cpplint"
 }
 
-# print usage and exit if number of arguments != 1
 [ $# -eq 1 ] || { print_usage ; exit 0; }
 
-# exit if any dependencies are not met
 assert_dependencies "$1"
+
+path="$1/src"
 
 # run cpplint on all cpp files 
 # Some checks are disabled, since google's lint is very restrictive
 # xargs echo -n: remove trailing newline from arguments
 # This might break with filenames containing spaces
 2>&1 "$cpplint" --filter=-whitespace,-legal,-build/header_guard,\
--build/include_order,-runtime/references,-readability/streams \
-  $(find "$1" -name "*.h" -or -name "*.cpp" -or -name "*.cc" | xargs echo -n)\
+-build/include_order,-runtime/references,-readability/streams,-build/storage_class,-readability/namespace \
+  $(find "$path" -name "*.h" -or -name "*.cpp" -or -name "*.hpp" | xargs echo -n)\
 | grep -v ^Done
 
 # return with cpplint's return code 
