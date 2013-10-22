@@ -18,6 +18,8 @@ Algorithms:
   Matrix multiplication as invented by [Strassen](http://en.wikipedia.org/wiki/Strassen_algorithm "Wikipedia: Strassen algorithm")
 - **al/radixsort.h**  
   [LSD Radixsort](http://en.wikipedia.org/wiki/Radix_sort#Least_significant_digit_radix_sorts "Wikipedia: Radixsort")
+- **al/murmur.h**   
+  [MurmurHash](http://en.wikipedia.org/wiki/MurmurHash#Algorithm "Wikipedia: MurmurHash") as invented by Austin Appleby
 
 Data structures:
 -----------------
@@ -40,6 +42,8 @@ Project structure:
   Unit tests for data structures
 - **test/src/generic/**    
   Generic unit tests (`rule-of-five.h`, useful for default constructible objects that implement the rule of five)
+- **test/smhasher/**    
+  smhasher build to verify my MurmurHash implementation
 - **scripts/**    
   Helper scripts (`build.sh`, `build-and-run-tests.sh`)
 

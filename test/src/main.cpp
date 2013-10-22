@@ -8,6 +8,7 @@
 #include "al/sort-and-count-inversions/main.h"
 #include "al/strassen-matrix-multiply/main.h"
 #include "al/radixsort/main.h"
+#include "al/murmur/main.h"
 
 int main(int argc, char **argv) {
   testing::InitGoogleTest(&argc, argv);
