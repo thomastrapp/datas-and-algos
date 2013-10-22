@@ -6,6 +6,7 @@
 #include <memory>
 #include <iomanip>
 #include <vector>
+#include <algorithm>
 
 namespace ds
 {
