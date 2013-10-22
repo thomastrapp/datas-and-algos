@@ -4,6 +4,7 @@
 #include <utility>
 #include <vector>
 #include <stdexcept>
+#include <algorithm>
 
 namespace ds {
 
