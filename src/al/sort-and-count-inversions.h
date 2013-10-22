@@ -5,6 +5,8 @@
 #include <cstring>
 #include <vector>
 #include <iterator>
+#include <algorithm>
+#include <cstdint>
 
 namespace al {
 
@@ -19,7 +21,7 @@ namespace al {
 //    }
 //  }
 
-template<typename in_iter, typename out_iter, typename counter = unsigned long>
+template<typename in_iter, typename out_iter, typename counter = uint64_t>
 counter sort_and_count_inversions_merge(
   in_iter left, 
   in_iter left_end,
@@ -67,7 +69,7 @@ counter sort_and_count_inversions_merge(
   return inversions;
 }
 
-template<typename iter, typename counter = unsigned long>
+template<typename iter, typename counter = uint64_t>
 counter sort_and_count_inversions(iter begin, iter end)
 {
   typedef typename std::iterator_traits<iter>::difference_type iter_range;
