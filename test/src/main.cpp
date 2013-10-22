@@ -3,6 +3,7 @@
 #include "ds/stack/main.h"
 #include "ds/square-matrix/main.h"
 #include "ds/binary-search-tree/main.h"
+#include "ds/fixed-hashtable/main.h"
 
 #include "al/mergesort/main.h"
 #include "al/sort-and-count-inversions/main.h"

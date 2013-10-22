@@ -24,11 +24,13 @@ Algorithms:
 Data structures:
 -----------------
 - **ds/square-matrix.h**  
-  A square matrix utilising strassen-matrix-multiply.h
+  A square matrix utilising `strassen-matrix-multiply.h`
 - **ds/stack.h**  
   A stack
 - **ds/binary-search-tree.h**  
   A binary search tree
+- **ds/fixed-hashtable.h**   
+  A simple hashtable with fixed size. `al::murmur` is used as a hash function.
 
 Project structure:
 -------------------
@@ -43,9 +45,11 @@ Project structure:
 - **test/src/generic/**    
   Generic unit tests (`rule-of-five.h`, useful for default constructible objects that implement the rule of five)
 - **test/smhasher/**    
-  smhasher build to verify my MurmurHash implementation
+  [SMHasher](http://code.google.com/p/smhasher/ "Google Code: SMHasher") build to verify my MurmurHash implementation. Will automatically download SMHasher from Google Code.
 - **scripts/**    
-  Helper scripts (`build.sh`, `build-and-run-tests.sh`)
+  Helper scripts (`build.sh`, `build-and-run-tests.sh`, ...)
+- **scripts/static-analysis/**    
+  Convenience wrappers for cppcheck and cpplint (`run_cppcheck.sh`, `run_cpplint.sh`)
 
 Build unit tests:
 ------------------
@@ -60,5 +64,5 @@ The unit testing framework ([googletest](http://code.google.com/p/googletest/ "G
 
 Dependencies:
 --------------
-cmake >= 2.8.7
+cmake >= 2.8.7, boost (`boost::optional` for `ds::fixed_hashtable`)
 
