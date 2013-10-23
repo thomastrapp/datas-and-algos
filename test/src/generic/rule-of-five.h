@@ -3,6 +3,9 @@
 
 #include "gtest/gtest.h"
 
+namespace
+{
+
 template<typename T>
 class RuleOfFiveTest : public ::testing::Test
 {
@@ -51,5 +54,7 @@ TYPED_TEST_P(RuleOfFiveTest, isMoveAssignable)
 REGISTER_TYPED_TEST_CASE_P(RuleOfFiveTest, 
   isCopyConstructible, isMoveConstructible, AssignmentReturnsReference, 
   isAssignable, isMoveAssignable);
+
+}
 
 #endif // GENERIC_RULE_OF_FIVE_H
