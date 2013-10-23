@@ -30,7 +30,9 @@ Data structures:
 - **ds/binary-search-tree.h**  
   A binary search tree
 - **ds/fixed-hashtable.h**   
-  A simple hashtable with fixed size. `al::murmur` is used as a hash function.
+  A hashtable with fixed size. `al::murmur` is used as a hash function.
+- **ds/priority-queue.h**   
+  A priority queue based on `std::make_heap`, `std::push_heap` and `std::pop_heap`
 
 Project structure:
 -------------------
