@@ -7,31 +7,31 @@ namespace {
 
 TEST(AlMurmurTest, SameInputSameResult)
 {
-  std::string first("some-input-test");
-  std::string second("some-input-test");
+  const char * first = "some-input-test";
+  const char * second = "some-input-test";
 
   uint32_t hash_first = al::murmur_32(
-    reinterpret_cast<const uint32_t *>(first.c_str()),
-    sizeof(first.c_str())
+    reinterpret_cast<const uint32_t *>(first),
+    strlen(first)
   );
 
   uint32_t hash_second = al::murmur_32(
-    reinterpret_cast<const uint32_t *>(second.c_str()),
-    sizeof(second.c_str())
+    reinterpret_cast<const uint32_t *>(second),
+    strlen(second)
   );
 
   EXPECT_EQ(hash_first, hash_second);
 
   uint32_t seed = 23235;
   uint32_t seeded_hash_first = al::murmur_32(
-    reinterpret_cast<const uint32_t *>(first.c_str()),
-    sizeof(first.c_str()),
+    reinterpret_cast<const uint32_t *>(first),
+    strlen(first),
     seed
   );
 
   uint32_t seeded_hash_second = al::murmur_32(
-    reinterpret_cast<const uint32_t *>(second.c_str()),
-    sizeof(second.c_str()),
+    reinterpret_cast<const uint32_t *>(second),
+    strlen(second),
     seed
   );
 
