@@ -1,11 +1,6 @@
 #!/usr/bin/env bash
 
-# build all builds:
-#   build/debug/
-#   build/release/
-#   ...
-
-set -o pipefail
+# simple build script for cmake builds
 
 red_f=$(tput setaf 1)
 hl_f=$(tput setaf 5)
@@ -15,14 +10,15 @@ hl_reset_all=$(tput sgr0)
 
 print_usage()
 {
-  echo "Usage:" "$0" "[path to project root]"
-  echo "       Build all builds"
+  echo "Usage:" "$0" "BUILD_TYPE" "PROJECT_ROOT"
+  echo "Build cmake project in PROJECT_ROOT with build type BUILD_TYPE"
+  echo "Available build types: all, scan, debug, release"
 }
 
 assert_preconditions()
 {
   [ -d "$1" ] || {
-    echo >&2 "Given parameter is not a directory"; exit 1;
+    echo >&2 "$1 is not a directory"; exit 1;
   }
 
   # at least bash version 4 required (associative arrays)
@@ -33,17 +29,37 @@ assert_preconditions()
   }
 }
 
-[ $# -eq 1 ] || { print_usage ; exit 0; }
+[ $# -eq 2 ] || { print_usage ; exit 0; }
 
-assert_preconditions "$1"
-
+# available builds with cmake flags
 declare -A builds
-#builds[release]="-DCMAKE_BUILD_TYPE=Release"
+builds[release]="-DCMAKE_BUILD_TYPE=Release"
 builds[debug]="-DCMAKE_BUILD_TYPE=Debug"
-#builds[scan_build]="-DSCAN_BUILD=ON"
+builds[clang_scan]="-DSCAN_BUILD=ON"
 
-cd "$1" || {
-  echo >&2 "Failed changing working directory to $1"; exit 1; 
+# prefix to make command (required by clang's scan-build)
+declare -A make_prefix
+make_prefix[release]=""
+make_prefix[debug]=""
+make_prefix[clang_scan]="scan-build"
+
+project_root="$2"
+assert_preconditions "$project_root"
+
+# build available?
+[[ "$1" == "all" || ${builds[$1]} ]] || {
+  echo >&2 "$1 is not an available build type"; exit 1;
+}
+
+selected_builds=""
+if [[ "$1" == "all" ]] ; then
+  selected_builds=${!builds[@]}
+else
+  selected_builds="$1"
+fi
+
+cd "$project_root" || {
+  echo >&2 "Failed changing working directory to $project_root"; exit 1; 
 }
 
 [ -d build ] || {
@@ -56,7 +72,7 @@ cd build || {
   echo >&2 "Failed changing into build directory"; exit 1;
 }
 
-for build_type in "${!builds[@]}" ; do
+for build_type in ${selected_builds[@]} ; do
   echo 
   echo "${hl_reset}${hl_f}*******************************${hl_reset}"
   echo "${hl_reset}${hl_f}***  ${bold}${red_f}$build_type${hl_reset_all}"
@@ -77,22 +93,15 @@ for build_type in "${!builds[@]}" ; do
   # there's no "cmake clean"
   find . -iname "*cmake*" -exec rm -rf {} \+
 
-  CCC_CXX=/usr/bin/clang++ cmake "${builds[$build_type]}" ../../ | sed "s/^/    /" || {
+  cmake "${builds[$build_type]}" ../../ | sed "s/^/    /" || {
     echo >&2 "cmake ${builds[$build_type]} failed in build $build_type"; 
     exit 1;
   }
 
-  if [ "$build_type" == "scan_build" ] ; then
-    CCC_CXX=/usr/bin/clang++ scan-build make | sed "s/^/    /" || {
-      echo >&2 "scan-build make failed in build $build_type"; 
-      exit 1;
-    }
-  else
-    make | sed "s/^/    /" || {
-      echo >&2 "make failed in build $build_type"; 
-      exit 1;
-    }
-  fi
+  ${make_prefix[$build_type]} make | sed "s/^/    /" || {
+    echo >&2 "make failed in build $build_type"; 
+    exit 1;
+  }
 
   cd .. || {
     echo >&2 "Failed leaving build directory"; exit 1;
