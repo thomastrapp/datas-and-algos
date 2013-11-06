@@ -1,15 +1,15 @@
 cmake_minimum_required(VERSION 2.8)
-project(datas-and-algos)
-
 #set(CMAKE_VERBOSE_MAKEFILE on)
 
-option(SCAN_BUILD "Static analysis with clang's ccc-analyzer" OFF)
-
+option(SCAN_BUILD "Static analysis with clang's c++-analyzer" OFF)
 if(SCAN_BUILD)
-  SET(CMAKE_CXX_FLAGS "-Weverything -Wno-c++11-extensions -g")
+  # these SETs only work before any project() is declared
+  SET(CCC_CXX "/usr/bin/clang++")
   SET(CMAKE_CXX_COMPILER "/usr/share/clang/scan-build/c++-analyzer")
-  SET(CMAKE_COMPILER_IS_GNUCXX OFF)
+  SET(CMAKE_CXX_FLAGS "-Weverything -g -std=c++11")
 endif(SCAN_BUILD)
+
+project(datas-and-algos)
 
 add_definitions("-std=c++11")
 
