@@ -8,11 +8,23 @@ bold=$(tput bold)
 hl_reset=$(tput op)
 hl_reset_all=$(tput sgr0)
 
+# available builds with cmake flags
+declare -A builds
+builds[release]="-DCMAKE_BUILD_TYPE=Release"
+builds[debug]="-DCMAKE_BUILD_TYPE=Debug"
+builds[clang_scan]="-DSCAN_BUILD=ON"
+builds[tcmalloc]="-DTCMALLOC=ON -DCMAKE_BUILD_TYPE=Debug"
+builds[release_symbols]="-DCMAKE_BUILD_TYPE=Release -DSYMBOLS=ON"
+
 print_usage()
 {
   echo "Usage:" "$0" "BUILD_TYPE" "PROJECT_ROOT"
   echo "Build cmake project in PROJECT_ROOT with build type BUILD_TYPE"
-  echo "Available build types: all, scan, debug, release"
+  echo -n "Available build types: all,"
+  {
+    local IFS=","
+    echo "$*"
+  }
 }
 
 assert_preconditions()
@@ -29,18 +41,11 @@ assert_preconditions()
   }
 }
 
-[ $# -eq 2 ] || { print_usage ; exit 0; }
-
-# available builds with cmake flags
-declare -A builds
-builds[release]="-DCMAKE_BUILD_TYPE=Release"
-builds[debug]="-DCMAKE_BUILD_TYPE=Debug"
-builds[clang_scan]="-DSCAN_BUILD=ON"
+#build_names="${!builds[@]}"
+[ $# -eq 2 ] || { print_usage ${!builds[@]} ; exit 0; }
 
 # prefix to make command (required by clang's scan-build)
 declare -A make_prefix
-make_prefix[release]=""
-make_prefix[debug]=""
 make_prefix[clang_scan]="scan-build"
 
 project_root="$2"
