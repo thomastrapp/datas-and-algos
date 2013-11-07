@@ -93,7 +93,7 @@ for build_type in ${selected_builds[@]} ; do
   # there's no "cmake clean"
   find . -iname "*cmake*" -exec rm -rf {} \+
 
-  cmake "${builds[$build_type]}" ../../ | sed "s/^/    /" || {
+  cmake ${builds[$build_type]} ../../ | sed "s/^/    /" || {
     echo >&2 "cmake ${builds[$build_type]} failed in build $build_type"; 
     exit 1;
   }
