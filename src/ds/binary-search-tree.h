@@ -364,10 +364,11 @@ private:
 
   void swap(ds::binary_search_tree<value_type>& tree)
   {
-    std::swap(this->parent, tree.parent);
-    std::swap(this->left, tree.left);
-    std::swap(this->right, tree.right);
-    std::swap(this->val, tree.val);
+    using std;
+    swap(this->parent, tree.parent);
+    swap(this->left, tree.left);
+    swap(this->right, tree.right);
+    swap(this->val, tree.val);
   }
 
   ds::binary_search_tree<value_type> * parent;
