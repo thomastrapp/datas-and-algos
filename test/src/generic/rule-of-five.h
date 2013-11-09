@@ -23,9 +23,9 @@ TYPED_TEST_P(RuleOfFiveTest, isCopyConstructible)
   TypeParam left(right);
 }
 
-TYPED_TEST_P(RuleOfFiveTest, isMoveConstructible)
+TYPED_TEST_P(RuleOfFiveTest, isNothrowMoveConstructible)
 {
-  TypeParam left(std::move(TypeParam()));
+  EXPECT_TRUE(std::is_nothrow_move_constructible<TypeParam>::value);
 }
 
 TYPED_TEST_P(RuleOfFiveTest, isAssignable)
@@ -49,17 +49,9 @@ TYPED_TEST_P(RuleOfFiveTest, AssignmentReturnsReference)
   left = right = third;
 }
 
-TYPED_TEST_P(RuleOfFiveTest, isMoveAssignable)
-{
-  TypeParam left;
-  TypeParam right;
-
-  left = std::move(right);
-}
-
 REGISTER_TYPED_TEST_CASE_P(RuleOfFiveTest, 
-  isCopyConstructible, isMoveConstructible, AssignmentReturnsReference, 
-  isAssignable, isMoveAssignable);
+  isCopyConstructible, isNothrowMoveConstructible, AssignmentReturnsReference,
+  isAssignable);
 
 }
 
