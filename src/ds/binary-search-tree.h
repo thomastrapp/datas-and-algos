@@ -60,7 +60,7 @@ public:
       this->right->parent = this;
   }
 
-  explicit binary_search_tree(
+  binary_search_tree(
     const std::vector<value_type>& values, 
     bool is_sorted
   )
