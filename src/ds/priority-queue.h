@@ -89,6 +89,16 @@ public:
     );
   }
 
+  void push(value_type&& value)
+  {
+    this->container.push_back(std::move(value));
+    std::push_heap(
+      this->container.begin(),
+      this->container.end(),
+      comparison_type()
+    );
+  }
+
   void pop()
   {
     std::pop_heap(
