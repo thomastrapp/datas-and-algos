@@ -7,11 +7,19 @@
 #include <iomanip>
 #include <vector>
 #include <algorithm>
+#include <type_traits>
 
 namespace ds
 {
 
-template<typename value_type>
+template<
+  typename value_type,
+  // since binary_search_tree's move constructor is marked noexcept
+  // value_type's move constructor must be noexcept, too
+  typename = typename std::enable_if<
+    std::is_nothrow_move_constructible<value_type>::value
+  >::type
+>
 class binary_search_tree
 {
 public:
@@ -34,11 +42,11 @@ public:
   {
   }
 
-  binary_search_tree(ds::binary_search_tree<value_type>&& tree)
+  binary_search_tree(ds::binary_search_tree<value_type>&& tree) noexcept
   : parent(std::move(tree.parent)),
     left(std::move(tree.left)),
     right(std::move(tree.right)),
-    val(std::move(tree.val))
+    val(std::move(tree.val)) // noexcept, enforced by enable_if
   {
   }
 
