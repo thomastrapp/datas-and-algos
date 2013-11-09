@@ -129,7 +129,8 @@ private:
     priority_queue<value_type, container_type, comparison_type>& right
   )
   {
-    std::swap(left.container, right.container);
+    using std::swap;
+    swap(left.container, right.container);
   }
 
   container_type container;
