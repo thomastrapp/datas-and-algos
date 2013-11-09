@@ -9,6 +9,8 @@
 #include <algorithm>
 #include <type_traits>
 
+#include "util/make-unique.h"
+
 namespace ds
 {
 
@@ -54,11 +56,11 @@ public:
   : parent(nullptr),
     left(
       tree.left == nullptr ? nullptr :
-      new ds::binary_search_tree<value_type>(*tree.left)
+      util::make_unique<ds::binary_search_tree<value_type>>(*tree.left)
     ),
     right(
       tree.right == nullptr ? nullptr :
-      new ds::binary_search_tree<value_type>(*tree.right)
+      util::make_unique<ds::binary_search_tree<value_type>>(*tree.right)
     ),
     val(tree.val)
   {
