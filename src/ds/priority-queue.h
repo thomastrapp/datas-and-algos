@@ -64,7 +64,7 @@ public:
     return this->container.empty();
   }
 
-  bool size() const
+  size_t size() const
   {
     return this->container.size();
   }
