@@ -1,6 +1,8 @@
 #ifndef GENERIC_RULE_OF_FIVE_H
 #define GENERIC_RULE_OF_FIVE_H
 
+#include <type_traits>
+
 #include "gtest/gtest.h"
 
 namespace
@@ -32,6 +34,10 @@ TYPED_TEST_P(RuleOfFiveTest, isAssignable)
   TypeParam right;
 
   left = right;
+
+  // EXPECT_TRUE is a macro, therefore chokes on commas
+  bool b = std::is_assignable<TypeParam, TypeParam>::value;
+  EXPECT_TRUE(b);
 }
 
 TYPED_TEST_P(RuleOfFiveTest, AssignmentReturnsReference)
