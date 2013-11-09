@@ -11,8 +11,13 @@ namespace ds
 
 template<
   typename value_type, 
-  typename container_type = std::vector<value_type>, 
-  typename comparison_type = std::less<value_type>
+  typename container_type = std::vector<value_type>,
+  typename comparison_type = std::less<value_type>,
+  // since priority_queue's move constructor is marked noexcept,
+  // container_type also has to be nothrow move constructible
+  typename = typename std::enable_if<
+    std::is_nothrow_move_constructible<container_type>::value
+  >::type
 >
 class priority_queue 
 {
@@ -46,8 +51,8 @@ public:
 
   priority_queue(
     priority_queue<value_type, container_type, comparison_type>&& queue
-  )
-  : container(std::move(queue.container))
+  ) noexcept
+  : container(std::move(queue.container)) // noexcept per enable_if requirement
   {
   }
 
