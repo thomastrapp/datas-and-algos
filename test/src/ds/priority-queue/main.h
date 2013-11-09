@@ -15,10 +15,14 @@ TEST(DsPriorityQueueTest, PushPopValues)
   std::vector<int> values {4,5,7,2,3,99,100,55,98,123};
   ds::priority_queue<int> queue;
 
+  EXPECT_TRUE(queue.empty());
+
   for(const auto& v : values)
   {
     queue.push(v);
   }
+
+  EXPECT_EQ(values.size(), queue.size());
 
   while( values.size() )
   {
@@ -30,6 +34,7 @@ TEST(DsPriorityQueueTest, PushPopValues)
   }
 
   EXPECT_EQ(values.size(), 0);
+  EXPECT_TRUE(queue.empty());
 }
 
 TEST(DsPriorityQueueTest, MinQueue)
