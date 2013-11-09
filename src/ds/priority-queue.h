@@ -69,7 +69,12 @@ public:
     return this->container.size();
   }
 
-  value_type top() const
+  const value_type& top() const
+  {
+    return this->container.front();
+  }
+
+  value_type& top()
   {
     return this->container.front();
   }
