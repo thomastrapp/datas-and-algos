@@ -2,6 +2,8 @@
 
 # simple build script for cmake builds
 
+set -o pipefail
+
 red_f=$(tput setaf 1)
 hl_f=$(tput setaf 5)
 bold=$(tput bold)
