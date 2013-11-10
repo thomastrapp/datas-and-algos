@@ -3,16 +3,12 @@
 
 namespace {
 
-template<typename T>
 class DsStackTest : public ::testing::Test
 {
-  public:
-    typedef T value_type;
-
   protected:
     bool stack_values_equal(
-      ds::stack<T> left, 
-      ds::stack<T> right
+      ds::stack<int> left, 
+      ds::stack<int> right
     )
     {
       if( left.size() != right.size() )
@@ -31,27 +27,19 @@ class DsStackTest : public ::testing::Test
     }
 };
 
-typedef DsStackTest<int> DsStackTestInt;
-
-typedef ::testing::Types<int, bool> TestElementTypes;
-TYPED_TEST_CASE(DsStackTest, TestElementTypes);
-
-TYPED_TEST(DsStackTest, EmptyRemoveFails)
+TEST_F(DsStackTest, EmptyRemoveFails)
 {
-  typedef typename TestFixture::value_type t;
-  ds::stack<t> s;
-
+  ds::stack<int> s;
   EXPECT_THROW(s.pop(), std::out_of_range);
 }
 
-TYPED_TEST(DsStackTest, AddRemoveToZero)
+TEST_F(DsStackTest, AddRemoveToZero)
 {
-  typedef typename TestFixture::value_type t;
-  ds::stack<t> s;
+  ds::stack<int> s;
 
-  s.push(static_cast<t>(0));
-  s.push(static_cast<t>(1));
-  s.push(static_cast<t>(2));
+  s.push(0);
+  s.push(1);
+  s.push(2);
   s.pop();
   s.pop();
   s.pop();
@@ -59,11 +47,10 @@ TYPED_TEST(DsStackTest, AddRemoveToZero)
   EXPECT_EQ(0, s.size());
 }
 
-TYPED_TEST(DsStackTest, AddRemoveConsistentSize)
+TEST_F(DsStackTest, AddRemoveConsistentSize)
 {
-  typedef typename TestFixture::value_type t;
-  ds::stack<t> s;
-  t my_val = static_cast<t>(0);
+  ds::stack<int> s;
+  int my_val = 0;
 
   const size_t num_add = 500;
   const size_t num_rem = 250;
@@ -98,15 +85,13 @@ TYPED_TEST(DsStackTest, AddRemoveConsistentSize)
   EXPECT_THROW(s.pop(), std::out_of_range);
 }
 
-TYPED_TEST(DsStackTest, EmptyTopFails)
+TEST_F(DsStackTest, EmptyTopFails)
 {
-  typedef typename TestFixture::value_type t;
-  ds::stack<t> s;
-
+  ds::stack<int> s;
   EXPECT_THROW(s.top(), std::out_of_range);
 }
 
-TEST_F(DsStackTestInt, CopiesValues)
+TEST_F(DsStackTest, CopiesValues)
 {
   ds::stack<int> left;
   std::vector<int> values {1,2,3,4,5};
@@ -124,7 +109,7 @@ TEST_F(DsStackTestInt, CopiesValues)
   EXPECT_TRUE(stack_values_equal(left, assignment));
 }
 
-TEST_F(DsStackTestInt, SavesValues)
+TEST_F(DsStackTest, SavesValues)
 {
   ds::stack<int> s;
   std::vector<int> values {1,2,3,4,5};
