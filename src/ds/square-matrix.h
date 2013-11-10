@@ -35,10 +35,9 @@ class square_matrix
     }
 
     square_matrix(square_matrix&& other)
-      : width(other.width),
+      : width(std::move(other.width)),
         data(std::move(other.data))
     {
-      other.width = 0;
     }
 
     square_matrix(
