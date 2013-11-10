@@ -47,7 +47,15 @@ public:
     return this->cont.size();
   }
 
-  value_type top() const
+  const value_type& top() const
+  {
+    if( this->cont.empty() )
+      throw std::out_of_range("cannot top, stack is empty");
+
+    return this->cont.back();
+  }
+
+  value_type& top()
   {
     if( this->cont.empty() )
       throw std::out_of_range("cannot top, stack is empty");
