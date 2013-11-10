@@ -124,22 +124,6 @@ TEST_F(DsStackTestInt, CopiesValues)
   EXPECT_TRUE(stack_values_equal(left, assignment));
 }
 
-TEST_F(DsStackTestInt, MovesValues)
-{
-  ds::stack<int> left;
-  std::vector<int> values {1,2,3,4,5};
-
-  for(auto i : values)
-  {
-    left.push(i);
-  }
-
-  ds::stack<int> victim(left);
-  ds::stack<int> move_construct(std::move(victim));
-  EXPECT_TRUE(stack_values_equal(left, move_construct));
-  EXPECT_EQ(0, victim.size());
-}
-
 TEST_F(DsStackTestInt, SavesValues)
 {
   ds::stack<int> s;
