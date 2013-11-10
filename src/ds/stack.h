@@ -28,7 +28,6 @@ public:
   stack(stack<value_type, container_type>&& other)
   : cont(std::move(other.cont))
   {
-    other.cont.clear();
   }
 
   stack<value_type, container_type>& 
