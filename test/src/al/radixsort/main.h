@@ -7,7 +7,7 @@
 
 namespace {
 
-TEST(AlRadixsortText, ZeroElements)
+TEST(AlRadixsortTest, ZeroElements)
 {
   std::vector<unsigned int> v;
 
@@ -16,7 +16,7 @@ TEST(AlRadixsortText, ZeroElements)
   EXPECT_EQ(0, v.size());
 }
 
-TEST(AlRadixsortText, OneElement)
+TEST(AlRadixsortTest, OneElement)
 {
   const unsigned int my_value = 23;
   std::vector<unsigned int> v {my_value};
@@ -27,7 +27,7 @@ TEST(AlRadixsortText, OneElement)
   EXPECT_EQ(1, v.size());
 }
 
-TEST(AlRadixsortText, TwoElements)
+TEST(AlRadixsortTest, TwoElements)
 {
   std::vector<unsigned int> v = {99,66};
   al::radixsort(v);
@@ -37,7 +37,7 @@ TEST(AlRadixsortText, TwoElements)
   EXPECT_EQ(99, v.back());
 }
 
-TEST(AlRadixsortText, ThreeElements)
+TEST(AlRadixsortTest, ThreeElements)
 {
   std::vector<unsigned int> v = {99,66,88};
 
@@ -48,7 +48,7 @@ TEST(AlRadixsortText, ThreeElements)
   EXPECT_EQ(99, v.back());
 }
 
-TEST(AlRadixsortText, Duplicates)
+TEST(AlRadixsortTest, Duplicates)
 {
   std::vector<unsigned int> v = {99,99,99};
 
@@ -59,7 +59,7 @@ TEST(AlRadixsortText, Duplicates)
   EXPECT_EQ(99, v.back());
 }
 
-TEST(AlRadixsortText, IntMax)
+TEST(AlRadixsortTest, IntMax)
 {
   unsigned int max = std::numeric_limits<unsigned int>::max();
   std::vector<unsigned int> v = {max,max-1,max-2};
@@ -71,7 +71,7 @@ TEST(AlRadixsortText, IntMax)
   EXPECT_EQ(max, v.back());
 }
 
-TEST(AlRadixsortText, SortsValues)
+TEST(AlRadixsortTest, SortsValues)
 {
   std::vector<unsigned int> unsorted{12, 1, 15, 4, 15, 61, 2, 3, 4, 2, 1, 1};
   std::vector<unsigned int> sorted{1, 1, 1, 2, 2, 3, 4, 4, 12, 15, 15, 61};
@@ -81,7 +81,7 @@ TEST(AlRadixsortText, SortsValues)
   EXPECT_EQ(0, std::memcmp(unsorted.data(), sorted.data(), unsorted.size()));
 }
 
-TEST(AlRadixsortText, Sorts10kValues)
+TEST(AlRadixsortTest, Sorts10kValues)
 {
   // namespace data:
   // - random_numbers
