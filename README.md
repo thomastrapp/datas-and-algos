@@ -20,6 +20,8 @@ Algorithms:
   [LSD Radixsort](http://en.wikipedia.org/wiki/Radix_sort#Least_significant_digit_radix_sorts "Wikipedia: Radixsort")
 - **al/murmur.h**   
   [MurmurHash](http://en.wikipedia.org/wiki/MurmurHash#Algorithm "Wikipedia: MurmurHash") as invented by Austin Appleby
+- **al/counting-sort.h**   
+  [Counting Sort](http://en.wikipedia.org/wiki/Counting_sort "Wikipedia: Counting sort")
 
 Data structures:
 -----------------

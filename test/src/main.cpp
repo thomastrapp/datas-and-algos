@@ -5,6 +5,7 @@
 #include "al/strassen-matrix-multiply/main.h"
 #include "al/radixsort/main.h"
 #include "al/murmur/main.h"
+#include "al/counting-sort/main.h"
 
 #include "ds/stack/main.h"
 #include "ds/square-matrix/main.h"
