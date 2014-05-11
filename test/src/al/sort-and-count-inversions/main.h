@@ -77,7 +77,7 @@ TEST(AlSortAndCountTest, SortsValues)
 
   al::sort_and_count_inversions(unsorted, unsorted + size);
 
-  EXPECT_EQ(0, std::memcmp(unsorted, sorted, size));
+  EXPECT_EQ(0, std::memcmp(unsorted, sorted, sizeof(unsorted)));
 }
 
 TEST(AlSortAndCountTest, TextbookExample)

@@ -18,7 +18,7 @@ bool is_equal(const container& left, const container& right)
 {
   return 
     left.size() == right.size() && 
-    std::memcmp(left.data(), right.data(), left.size()) == 0;
+    std::memcmp(left.data(), right.data(), left.size() * sizeof(typename container::value_type)) == 0;
 }
 
 }

@@ -78,7 +78,7 @@ TEST(AlRadixsortTest, SortsValues)
 
   al::radixsort(unsorted);
 
-  EXPECT_EQ(0, std::memcmp(unsorted.data(), sorted.data(), unsorted.size()));
+  EXPECT_EQ(0, std::memcmp(unsorted.data(), sorted.data(), unsorted.size() * sizeof(unsigned int)));
 }
 
 TEST(AlRadixsortTest, Sorts10kValues)
@@ -100,7 +100,7 @@ TEST(AlRadixsortTest, Sorts10kValues)
 
   EXPECT_EQ(numbers.size(), numbers_sorted.size());
   EXPECT_TRUE(std::equal(numbers.begin(), numbers.end(), numbers_sorted.begin()));
-  EXPECT_EQ(0, std::memcmp(numbers.data(), numbers_sorted.data(), numbers.size()));
+  EXPECT_EQ(0, std::memcmp(numbers.data(), numbers_sorted.data(), numbers.size() * sizeof(unsigned int)));
 }
 
 }
