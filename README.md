@@ -22,6 +22,8 @@ Algorithms:
   [MurmurHash](http://en.wikipedia.org/wiki/MurmurHash#Algorithm "Wikipedia: MurmurHash") as invented by Austin Appleby
 - **al/counting-sort.h**   
   [Counting Sort](http://en.wikipedia.org/wiki/Counting_sort "Wikipedia: Counting sort")
+- **al/boyer-moore-substring.h**   
+  [Boyer-Moore String Search](http://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_string_search_algorithm "Wikipedia: Boyer-Moore string search algorithm")
 
 Data structures:
 -----------------

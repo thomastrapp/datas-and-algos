@@ -6,6 +6,7 @@
 #include "al/radixsort/main.h"
 #include "al/murmur/main.h"
 #include "al/counting-sort/main.h"
+#include "al/boyer-moore/main.h"
 
 #include "ds/stack/main.h"
 #include "ds/square-matrix/main.h"
