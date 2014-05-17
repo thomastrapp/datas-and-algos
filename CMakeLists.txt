@@ -13,6 +13,10 @@ project(datas-and-algos)
 
 add_definitions("-std=c++11")
 
+if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+  add_definitions("-Weverything")
+endif()
+
 if(CMAKE_COMPILER_IS_GNUCXX)
   add_definitions("-Wconversion" "-Wsign-conversion" "-Wextra" "-pedantic" "-Wall" "-Wextra" "-Wcast-align" "-Wcast-qual" "-Wctor-dtor-privacy" "-Wdisabled-optimization" "-Wformat=2" "-Winit-self" "-Wlogical-op" "-Wmissing-include-dirs" "-Woverloaded-virtual" "-Wredundant-decls" "-Wshadow" "-Wsign-promo" "-Wstrict-null-sentinel" "-Wstrict-overflow=5" "-Wswitch-default" "-Wundef" "-Wno-unused" "-Weffc++")
 endif(CMAKE_COMPILER_IS_GNUCXX)
