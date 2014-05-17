@@ -25,9 +25,7 @@ ExternalProject_Add(
     LOG_CONFIGURE ON
     LOG_BUILD ON)
 
-if(CMAKE_COMPILER_IS_GNUCXX)
-  add_definitions("-std=c++0x")
-endif(CMAKE_COMPILER_IS_GNUCXX)
+add_definitions("-std=c++11")
 
 ExternalProject_Get_Property(googletest source_dir)
 INCLUDE_DIRECTORIES(${source_dir}/include)
