@@ -18,7 +18,11 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
 endif()
 
 if(CMAKE_COMPILER_IS_GNUCXX)
-  add_definitions("-Wconversion" "-Wsign-conversion" "-Wextra" "-pedantic" "-Wall" "-Wextra" "-Wcast-align" "-Wcast-qual" "-Wctor-dtor-privacy" "-Wdisabled-optimization" "-Wformat=2" "-Winit-self" "-Wlogical-op" "-Wmissing-include-dirs" "-Woverloaded-virtual" "-Wredundant-decls" "-Wshadow" "-Wsign-promo" "-Wstrict-null-sentinel" "-Wstrict-overflow=5" "-Wswitch-default" "-Wundef" "-Wno-unused" "-Weffc++")
+  # removed "-Wsign-conversion"; see this bug 
+  # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=60342
+  # and this
+  # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=49626
+  add_definitions("-Wconversion" "-Wextra" "-pedantic" "-Wall" "-Wextra" "-Wcast-align" "-Wcast-qual" "-Wctor-dtor-privacy" "-Wdisabled-optimization" "-Wformat=2" "-Winit-self" "-Wlogical-op" "-Wmissing-include-dirs" "-Woverloaded-virtual" "-Wredundant-decls" "-Wshadow" "-Wsign-promo" "-Wstrict-null-sentinel" "-Wstrict-overflow=5" "-Wswitch-default" "-Wundef" "-Wno-unused" "-Weffc++")
 endif(CMAKE_COMPILER_IS_GNUCXX)
 
 include_directories("${PROJECT_SOURCE_DIR}/src")
