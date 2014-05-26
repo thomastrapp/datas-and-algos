@@ -1,5 +1,5 @@
-#ifndef AL_HASHTABLE_H
-#define AL_HASHTABLE_H
+#ifndef DS_HASHTABLE_H
+#define DS_HASHTABLE_H
 
 #include <vector>
 #include <cstdint>
@@ -62,4 +62,4 @@ private:
 
 }
 
-#endif // AL_HASHTABLE_H
+#endif // DS_HASHTABLE_H
