@@ -1,12 +1,9 @@
 Data Structures and Algorithms
 ===============================
-
-Copyright 2013 Thomas Trapp, http://www.thomastrapp.com
-
 datas-and-algos is free Software under the terms of the GNU General Public License
 Version 2. See COPYING for full license text.
 
-A (still) small repository of algorithms I have written for fun, including unit tests.
+Some data structures and algorithms I have implemented for fun, including unit tests.
 
 Algorithms:
 ------------
