@@ -47,7 +47,7 @@ uint32_t murmur_32(const uint32_t * data, size_t num_bytes, uint32_t seed = 0)
     hash = hash * m_multiply + m_add;
   }
 
-  if( num_remaining_bytes != 0 )
+  if( num_remaining_bytes )
   {
     // put all remaining bytes into a single four-byte-block
     const uint8_t * byte_wise = 
