@@ -35,9 +35,9 @@ INCLUDE_DIRECTORIES("${PROJECT_SOURCE_DIR}/src")
 ExternalProject_Get_Property(googletest binary_dir)
 LINK_DIRECTORIES(${binary_dir})
 
-ADD_EXECUTABLE(data-structures-test ${PROJECT_SOURCE_DIR}/src/main.cpp)
-ADD_DEPENDENCIES(data-structures-test googletest)
+ADD_EXECUTABLE(datas-and-algos-test ${PROJECT_SOURCE_DIR}/src/main.cpp)
+ADD_DEPENDENCIES(datas-and-algos-test googletest)
 
-TARGET_LINK_LIBRARIES(data-structures-test gtest)
-TARGET_LINK_LIBRARIES(data-structures-test pthread)
+TARGET_LINK_LIBRARIES(datas-and-algos-test gtest)
+TARGET_LINK_LIBRARIES(datas-and-algos-test pthread)
 
