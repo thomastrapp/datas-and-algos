@@ -27,11 +27,11 @@ endif(CMAKE_COMPILER_IS_GNUCXX)
 
 include_directories("${PROJECT_SOURCE_DIR}/src")
 
-add_executable(data-structures src/main.cpp)
+add_executable(datas-and-algos src/main.cpp)
 
 option(TCMALLOC "Link with libtcmalloc" OFF)
 if(TCMALLOC)
-  target_link_libraries(data-structures tcmalloc)
+  target_link_libraries(datas-and-algos tcmalloc)
 
   # remove this if you didn't configure gperftools with
   # --enable-frame-pointers (recommended for x86_64)
