@@ -16,7 +16,7 @@ Algorithms:
 - **al/radixsort.h**  
   [LSD Radixsort](http://en.wikipedia.org/wiki/Radix_sort#Least_significant_digit_radix_sorts "Wikipedia: Radixsort")
 - **al/murmur.h**   
-  [MurmurHash](http://en.wikipedia.org/wiki/MurmurHash#Algorithm "Wikipedia: MurmurHash") as invented by Austin Appleby
+  [MurmurHash](http://en.wikipedia.org/wiki/MurmurHash#Algorithm "Wikipedia: MurmurHash") 32bit/128bit as invented by Austin Appleby
 - **al/counting-sort.h**   
   [Counting Sort](http://en.wikipedia.org/wiki/Counting_sort "Wikipedia: Counting sort")
 - **al/boyer-moore-substring.h**   
@@ -48,7 +48,7 @@ Project structure:
 - **test/src/generic/**    
   Generic unit tests (`rule-of-five.h`, useful for default constructible objects that implement the rule of five)
 - **test/smhasher/**    
-  [SMHasher](http://code.google.com/p/smhasher/ "Google Code: SMHasher") build to verify my MurmurHash implementation. Will automatically download SMHasher from Google Code.
+  [SMHasher](http://code.google.com/p/smhasher/ "Google Code: SMHasher") build to verify my MurmurHash (32bit, 128bit) implementation. Will automatically download SMHasher from Google Code.
 - **scripts/**    
   Helper scripts (`build.sh`, `build-and-run-tests.sh`, ...)
 - **scripts/static-analysis/**    
