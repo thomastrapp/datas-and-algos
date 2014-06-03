@@ -80,5 +80,16 @@ TEST(AlMurmurTest, DifferentInputDifferentResult)
   EXPECT_NE(hash_first_128, hash_second_128);
 }
 
+TEST(AlMurmurTest, EmptySequenceReturnsZero)
+{
+  auto hash = al::murmur_32(nullptr, 0);
+  EXPECT_EQ(hash, 0);
+
+  auto hash_pair = al::murmur_128(nullptr, 0);
+  EXPECT_EQ(hash_pair.first, 0);
+  EXPECT_EQ(hash_pair.second, 0);
+}
+
+
 }
 
