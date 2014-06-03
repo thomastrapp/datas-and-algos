@@ -2,6 +2,7 @@
 #define AL_BM_STATIC_SKIP_TABLE_H
 
 #include <array>
+#include <limits>
 
 namespace al { 
 namespace bm {
