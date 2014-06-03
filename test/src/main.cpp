@@ -13,6 +13,7 @@
 #include "ds/binary-search-tree/main.h"
 #include "ds/fixed-hashtable/main.h"
 #include "ds/priority-queue/main.h"
+#include "ds/bloom-filter/main.h"
 
 int main(int argc, char **argv) {
   testing::InitGoogleTest(&argc, argv);
