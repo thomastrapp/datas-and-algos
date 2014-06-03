@@ -20,7 +20,7 @@
 namespace al
 {
 
-uint32_t murmur_32(const uint32_t * data, size_t num_bytes, uint32_t seed = 0)
+uint32_t murmur_32(const void * data, size_t num_bytes, uint32_t seed = 0)
 {
   // magic numbers
   const uint32_t m_constant_first = 0xcc9e2d51;
@@ -32,14 +32,15 @@ uint32_t murmur_32(const uint32_t * data, size_t num_bytes, uint32_t seed = 0)
 
   const size_t num_four_byte_blocks = num_bytes / 4;
   const size_t num_remaining_bytes = num_bytes % 4;
+  const uint32_t * blocks = static_cast<const uint32_t *>(data);
 
   uint32_t hash = seed;
 
-  // for each four-byte-block in data
+  // for each four-byte-block in blocks
   for(size_t i = 0; i < num_four_byte_blocks; ++i)
   {
     // perform some magic tricks
-    uint32_t block = data[i];
+    uint32_t block = blocks[i];
     block *= m_constant_first;
     block = (block << m_rotate_first) | (block >> (32 - m_rotate_first));
     block *= m_constant_second;
@@ -53,7 +54,7 @@ uint32_t murmur_32(const uint32_t * data, size_t num_bytes, uint32_t seed = 0)
   {
     // put all remaining bytes into a single four-byte-block
     const uint8_t * byte_wise = 
-      reinterpret_cast<const uint8_t *>(data + num_four_byte_blocks);
+      reinterpret_cast<const uint8_t *>(blocks + num_four_byte_blocks);
 
     uint32_t remaining_block = 0;
     for(unsigned int i = 0; i < num_remaining_bytes; ++i)
@@ -83,7 +84,7 @@ uint32_t murmur_32(const uint32_t * data, size_t num_bytes, uint32_t seed = 0)
   return hash;
 }
 
-std::pair<uint64_t, uint64_t> murmur_128(const uint64_t * data, size_t num_bytes, uint32_t seed = 0)
+std::pair<uint64_t, uint64_t> murmur_128(const void * data, size_t num_bytes, uint32_t seed = 0)
 {
   const uint64_t m_constant1 = 0x87c37b91114253d5;
   const uint64_t m_constant2 = 0x4cf5ad432745937f;
@@ -96,14 +97,15 @@ std::pair<uint64_t, uint64_t> murmur_128(const uint64_t * data, size_t num_bytes
 
   const size_t num_chunks = num_bytes / 16;
   const unsigned int num_remaining_bytes = num_bytes % 16;
+  const uint64_t * blocks = static_cast<const uint64_t *>(data);
 
   uint64_t hash_high = seed;
   uint64_t hash_low = seed;
 
   for(size_t i = 0; i < num_chunks; ++i)
   {
-    uint64_t block_high = *(data + i * 2);
-    uint64_t block_low  = *(data + i * 2 + 1);
+    uint64_t block_high = *(blocks + i * 2);
+    uint64_t block_low  = *(blocks + i * 2 + 1);
 
     block_high *= m_constant1;
     block_high  = (block_high << m_rotate1) | (block_high >> (64 - m_rotate1));
@@ -125,7 +127,7 @@ std::pair<uint64_t, uint64_t> murmur_128(const uint64_t * data, size_t num_bytes
   if( num_remaining_bytes )
   {
     const uint8_t * byte_wise =
-      reinterpret_cast<const uint8_t *>(data + num_chunks * 2);
+      reinterpret_cast<const uint8_t *>(blocks + num_chunks * 2);
 
     const int first_half = std::min(8U, num_remaining_bytes);
     uint64_t r_block_high = 0;

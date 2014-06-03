@@ -10,7 +10,7 @@ void smhasher_murmur_32(const void * data, int num_bytes, uint32_t seed, void * 
 {
   const uint32_t hash = 
     al::murmur_32(
-      static_cast<const uint32_t *>(data),
+      data,
       static_cast<size_t>(num_bytes),
       seed
     )
@@ -24,7 +24,7 @@ void smhasher_murmur_128(const void * data, int num_bytes, uint32_t seed, void *
 {
   auto hash =
     al::murmur_128(
-      static_cast<const uint64_t *>(data),
+      data,
       static_cast<size_t>(num_bytes),
       seed
     )
