@@ -6,13 +6,13 @@
 # debug
 # set -x
 
-cpplint="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/cpplint.py"
+cpplint="cpplint"
 
 assert_dependencies()
 {
   # Try to execute cpplint
   "$cpplint" --filter= > /dev/null 2>&1 \
-    || { echo >&2 "Cannot execute cpplint; place it in the working directory"; exit 1; }
+    || { echo >&2 "Cannot execute cpplint"; exit 1; }
   
   # check if a directory was passed
   [ -d "$1" ] \
