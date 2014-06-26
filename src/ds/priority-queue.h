@@ -14,45 +14,52 @@ template<
   typename container_type = std::vector<value_type>,
   typename comparison_type = std::less<value_type>,
   // since priority_queue's move constructor is marked noexcept,
-  // container_type also has to be nothrow move constructible
+  // container_type and comparison_type also have to be nothrow
+  // move constructible
   typename = typename std::enable_if<
-    std::is_nothrow_move_constructible<container_type>::value
+    std::is_nothrow_move_constructible<container_type>::value &&
+    std::is_nothrow_move_constructible<comparison_type>::value
   >::type
 >
 class priority_queue 
 {
 public:
   priority_queue()
-  : container()
+  : container(),
+    comp()
   {
   }
 
   explicit priority_queue(size_t content_size)
-  : container(content_size)
+  : container(content_size),
+    comp()
   {
   }
 
   explicit priority_queue(const std::vector<value_type>& values)
-  : container(values)
+  : container(values),
+    comp()
   {
     std::make_heap(
       this->container.begin(), 
       this->container.end(),
-      comparison_type()
+      this->comp
     );
   }
 
   priority_queue(
     const priority_queue<value_type, container_type, comparison_type>& queue
   )
-  : container(queue.container)
+  : container(queue.container),
+    comp()
   {
   }
 
   priority_queue(
     priority_queue<value_type, container_type, comparison_type>&& queue
   ) noexcept
-  : container(std::move(queue.container)) // noexcept per enable_if requirement
+  : container(std::move(queue.container)), // noexcept per enable_if requirement
+    comp(std::move(queue.comp))            // noexcept per enable_if requirement
   {
   }
 
@@ -90,7 +97,7 @@ public:
     std::push_heap(
       this->container.begin(), 
       this->container.end(), 
-      comparison_type()
+      this->comp
     );
   }
 
@@ -100,7 +107,7 @@ public:
     std::push_heap(
       this->container.begin(),
       this->container.end(),
-      comparison_type()
+      this->comp
     );
   }
 
@@ -109,7 +116,7 @@ public:
     std::pop_heap(
       this->container.begin(), 
       this->container.end(), 
-      comparison_type()
+      this->comp
     );
     this->container.pop_back();
   }
@@ -131,9 +138,11 @@ private:
   {
     using std::swap;
     swap(left.container, right.container);
+    swap(left.comp, right.comp);
   }
 
   container_type container;
+  comparison_type comp;
 };
 
 
